@@ -25,11 +25,13 @@ struct RecipeListView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                // Background Gradient
                 LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.purple.opacity(0.1)]),
                                startPoint: .top,
                                endPoint: .bottom)
                     .ignoresSafeArea()
 
+                // Main Content
                 if viewModel.isLoading {
                     ProgressView("Loading Recipes...")
                         .scaleEffect(1.5)
@@ -43,7 +45,7 @@ struct RecipeListView: View {
                     ScrollView {
                         VStack(spacing: 15) {
                             ForEach(groupedRecipes.keys.sorted(), id: \.self) { cuisine in
-                                // Custom Styled Header
+                                // Styled Header for Cuisine
                                 HStack {
                                     Text(cuisine.capitalized)
                                         .font(.system(size: 18, weight: .semibold, design: .rounded))
@@ -64,7 +66,7 @@ struct RecipeListView: View {
                                 }
                                 .padding(.horizontal)
 
-                                // Recipe Rows
+                                // Recipe Rows for Each Cuisine
                                 ForEach(groupedRecipes[cuisine] ?? []) { recipe in
                                     NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                                         RecipeRowView(recipe: recipe)
@@ -77,10 +79,10 @@ struct RecipeListView: View {
                     .refreshable {
                         viewModel.fetchData()
                     }
-                    .searchable(text: $searchText, prompt: "Search recipes")
                 }
             }
             .navigationTitle("Recipe Explorer")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -91,8 +93,12 @@ struct RecipeListView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData()
+                if viewModel.recipes.isEmpty {
+                    viewModel.fetchData()
+                }
             }
         }
     }
 }
+
+
