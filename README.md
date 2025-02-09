@@ -24,9 +24,16 @@ Recipe Explorer is a clean, production-ready iOS app built using SwiftUI. The ap
 
 Screenshots:
 
-| Recipe List | Detail View |
-|-------------|-------------|
-| ![Recipe List](https://via.placeholder.com/300x600) | ![Detail View](https://via.placeholder.com/300x600) |
+### Home Page
+
+<img src="FetchTakeHomeProject/images/ss1.png" alt="ImageTab" width="250">
+
+### Search Functionality
+<img src="FetchTakeHomeProject/images/ss2.png" alt="ImageTab" width="250">
+
+### Detailed View: Image
+
+<img src="FetchTakeHomeProject/images/ss3.png" alt="ImageTab" width="250">
 
 ---
 
